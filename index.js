@@ -5,12 +5,14 @@ var rooms = [];
  
 app.use(express.static(__dirname));
 
+var io = require('socket.io').listen(app.listen(port));
+
+
+
 app.get("/", function(req, res){
     res.sendFile("index.html", {root: __dirname });
 });
  
-var io = require('socket.io').listen(app.listen(port));
-
 function findAvailableRoom() {
     for(var i=0;i< rooms.length;i++) {
         if(rooms[i] !== 2) {
@@ -22,22 +24,20 @@ function findAvailableRoom() {
     return rooms.length-1;
 }
 
-
 io.on('connection', function(socket){
 
-    console.log(rooms);
+ //   console.log(rooms);
     var a = findAvailableRoom();
     socket.join(a);
-    console.log('a user connected, joined group ' + a);
+   // console.log('a user connected, joined group ' + a);
     socket.on('disconnect', function(){
         rooms[a]--;
         socket.broadcast.to(a).emit('gone', '');
         socket.leave(a);
-        console.log('user disconnected');
+     //   console.log('user disconnected');
     });
     socket.on('send', function (data) {
         socket.broadcast.to(a).emit('message', data);
     });
 });
 
-//console.log("Listening on port " + port);
