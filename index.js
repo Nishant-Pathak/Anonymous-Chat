@@ -14,10 +14,15 @@ app.get("/", function(req, res){
 });
  
 function findAvailableRoom() {
-    for(var i=0;i< rooms.length;i++) {
-        if(rooms[i] !== 2) {
-            rooms[i]++;
-            return i;
+    var a = rooms.indexOf(1);
+    if(a !== -1) {
+        rooms[a]++;
+        return a;
+    } else {
+        a = rooms.indexOf(0)
+        if(a!==-1) {
+            rooms[a]++;
+            return a;
         }
     }
     rooms.push(1);
@@ -25,11 +30,9 @@ function findAvailableRoom() {
 }
 
 io.on('connection', function(socket){
-
- //   console.log(rooms);
+    console.log(io.sockets.sockets.length)
     var a = findAvailableRoom();
     socket.join(a);
-   // console.log('a user connected, joined group ' + a);
     socket.on('disconnect', function(){
         rooms[a]--;
         socket.broadcast.to(a).emit('gone', '');
