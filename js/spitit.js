@@ -1,5 +1,6 @@
 var messages = [];
 var socket;
+var tabActive = false;
 
 function renderChat(msg, side) {
     if(msg === "") return;
@@ -22,6 +23,8 @@ function renderChat(msg, side) {
             + '  <img src="./images/employee.png" class="img-circle" style="height:80px; width:80px;"> <span>You</span>'
             + ' </div>'
             +'</div>';
+    } else if (tabActive === false){
+        d += '<audio src="./sound/ping.mp3" autoplay></audio>';
     }
     $('#cid').append(d);
     $("html, body").animate({ scrollTop: $(document).height() }, 1000);
@@ -32,7 +35,7 @@ function renderChat(msg, side) {
 function sendToServer() {
     var a = $('#msg');
     renderChat(a.val(), "right");
-    socket.emit('send', { message: a.val() });
+    socket.emit('send', { message: encodeURIComponent(a.val()) });
     $('#msg').val('');
 }
 
@@ -42,18 +45,26 @@ function sendMsg(e) {
     }
 }
 
+$(window).blur(function() {
+    tabActive = false;
+});
+
+$(window).focus(function() {
+    tabActive = true;
+});
+
+
 (function () {
 $('#myModal').modal({keyboard:false});
 
     messages = [];
     socket = io.connect();
-//        socket = io.connect('//localhost:5000');
     $('#myModal').modal('hide');
     $('#app').show(); 
     socket.on('message', function (data) {
         if(data.message) {
             messages.push(data.message);
-            renderChat(data.message, "left");
+            renderChat(decodeURIComponent(data.message), "left");
         } else {
             console.log("There is a problem:", data);
         }
