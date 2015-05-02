@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+
+html,
+body,
+.container,
+#app,
+.container-fluid {
+  height: 100%;
+  min-height: 100%;
+}
+
+.client {background: #DDD; text-align:right;}
+.manager {background: #FFF; }

@@ -1,0 +1,23 @@
+{
+  "name": "Anonymous-Chat",
+  "version": "1.0.0",
+  "description": "Chat to anonymous",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "socket.io": "latest",
+    "express": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nishant-Pathak/Anonymous-Chat.git"
+  },
+  "author": "Nishant",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nishant-Pathak/Anonymous-Chat/issues"
+  },
+  "homepage": "https://github.com/Nishant-Pathak/Anonymous-Chat"
+}
