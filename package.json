@@ -4,7 +4,8 @@
   "description": "Chat to anonymous",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "dependencies": {
     "socket.io": "latest",
@@ -19,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/Nishant-Pathak/Anonymous-Chat/issues"
   },
+  "keywords": [
+    "node",
+    "heroku",
+    "express",
+    "socket.io"
+  ],
   "homepage": "https://github.com/Nishant-Pathak/Anonymous-Chat"
 }
