@@ -1,6 +1,6 @@
 var express = require("express");
 var app = express();
-var port = 3700;
+var port = process.env.PORT || 5000;
 var rooms = [];
  
 app.use(express.static(__dirname));
