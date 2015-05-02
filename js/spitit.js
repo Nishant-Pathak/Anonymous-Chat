@@ -46,7 +46,7 @@ function sendMsg(e) {
 $('#myModal').modal({keyboard:false});
 
     messages = [];
-    socket = io.connect('http://tafri.herokuapp.com:3700');
+    socket = io.connect('//tafri.herokuapp.com:3700');
     $('#myModal').modal('hide');
     $('#app').show(); 
     socket.on('message', function (data) {

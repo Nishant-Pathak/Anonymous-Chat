@@ -3,8 +3,10 @@ var app = express();
 var port = 3700;
 var rooms = [];
  
+app.use(express.static(__dirname));
+
 app.get("/", function(req, res){
-    res.sendFile("index.html");
+    res.sendFile("index.html", {root: __dirname });
 });
  
 var io = require('socket.io').listen(app.listen(port));
