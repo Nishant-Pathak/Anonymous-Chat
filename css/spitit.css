@@ -5,6 +5,14 @@ html, body {
     height: 100%;
 }
 
+#footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 20px;
+}
+
 html,
 body,
 .container,
@@ -14,5 +22,16 @@ body,
   min-height: 100%;
 }
 
-.client {background: #DDD; text-align:right;}
-.manager {background: #FFF; }
+#cid{
+   padding: 15px;
+  # overflow-y: auto;
+}
+
+.msgdiv {
+    word-break: break-word;
+}
+
+.msgdivYou {
+    word-break: break-word;
+    float: right;
+}

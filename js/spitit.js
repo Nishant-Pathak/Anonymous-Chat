@@ -6,21 +6,21 @@ function renderChat(msg, side) {
     if(msg === "") return;
 
     var name = "Anonymous";
-    var d = '  <div class="row well">'
-        + '<div class="col-sm-2">'
-        + '  <span>Anonymous</span><img src="./images/manager.png" class="img-circle" style="height:80px; width:80px;">'
+    var d = '  <div class="row well well-sm">'
+        + '<div class="col-xs-2">'
+        + '  <!--span>Anonymous</span--><img src="./images/manager.png" class="img-circle" style="height:30px; width:30px;">'
         + ' </div>'
-        + ' <div><br>'
-        + ' <strong>'+ msg +'</strong><br>'
+        + ' <div class="col-xs-10">'
+        + ' <strong class="msgdiv">'+ msg +'</strong>'
         + '</div>'
         + '</div>';
     if(side == "right") {
-        d = '  <div class="row well">'
-            +' <div class="col-sm-6 col-md-offset-4" style="text-align:right;"><br>'
-            +' <strong>'+ msg +'</strong><br>'
+        d = '  <div class="row well well-sm">'
+            +' <div class="col-xs-10">'
+            +' <strong class="msgdivYou">'+ msg +'</strong>'
             +'</div>'
-            +  '<div class="col-sm-2">'
-            + '  <img src="./images/employee.png" class="img-circle" style="height:80px; width:80px;"> <span>You</span>'
+            +  '<div class="col-xs-2">'
+            + '  <img src="./images/employee.png" class="img-circle" style="height:30px; width:30px;"> <!--span>You</span-->'
             + ' </div>'
             +'</div>';
     } else if (tabActive === false){
