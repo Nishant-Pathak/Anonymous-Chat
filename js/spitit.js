@@ -35,10 +35,11 @@ function renderChat(msg, side) {
 function sendToServer() {
     var a = $('#msg').val();
     a = a.trim();
+    $('#msg').val('');
     if(a === '') return;
     renderChat(a, "right");
     socket.emit('send', { message: encodeURIComponent(a) });
-    $('#msg').val('');
+
 }
 
 function sendMsg(e) {
