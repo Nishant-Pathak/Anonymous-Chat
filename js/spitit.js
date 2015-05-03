@@ -75,8 +75,15 @@ $('#myModal').modal({keyboard:false});
         }
     });
 
-    socket.on('gone', function (data) {
-        location.reload();
+    socket.on('status', function (data) {
+        console.log(data);
+        if(data === "0") { // other left
+            location.reload();
+        } else if(data === "1") { //first user
+        } else if(data === "2") {
+            $('#status').addClass('alert-success').removeClass('alert-info');
+            $('#status')[0].innerHTML = "<strong>User connected.</strong> Start chatting";
+        }
     });
     
 

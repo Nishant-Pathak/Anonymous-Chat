@@ -42,9 +42,13 @@ io.on('connection', function(socket){
     var a = findAvailableRoom();
     console.log('Assigning room:'+ a);
     socket.join(a);
+    if(rooms[a] === 2) {
+        io.sockets.to(a).emit('status', '2');
+    }
+
     socket.on('disconnect', function(){
         rooms[a]--;
-        socket.broadcast.to(a).emit('gone', '');
+        socket.broadcast.to(a).emit('status', '0');
         socket.leave(a);
     });
     socket.on('send', function (data) {
