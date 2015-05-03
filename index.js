@@ -14,12 +14,20 @@ app.get("/", function(req, res){
 });
  
 function findAvailableRoom() {
-    var a = rooms.indexOf(1);
-    if(a !== -1) {
-        rooms[a]++;
-        return a;
+    var b = {};
+    Object.keys(rooms).forEach(function(key) {
+        if(rooms[key] == 1) b[key] = rooms[key];
+    });
+//    console.log(b);
+    var d = Object.keys(b);
+    var s = d.length;
+    
+    if(s > 0) {
+        var x = parseInt(d[Math.floor((Math.random() * s))]);
+        rooms[x]++;
+        return x;
     } else {
-        a = rooms.indexOf(0)
+        var a = rooms.indexOf(0);
         if(a!==-1) {
             rooms[a]++;
             return a;
@@ -30,14 +38,14 @@ function findAvailableRoom() {
 }
 
 io.on('connection', function(socket){
-    console.log(io.sockets.sockets.length)
+    console.log("total users: " + io.sockets.sockets.length)
     var a = findAvailableRoom();
+    console.log('Assigning room:'+ a);
     socket.join(a);
     socket.on('disconnect', function(){
         rooms[a]--;
         socket.broadcast.to(a).emit('gone', '');
         socket.leave(a);
-     //   console.log('user disconnected');
     });
     socket.on('send', function (data) {
         socket.broadcast.to(a).emit('message', data);
