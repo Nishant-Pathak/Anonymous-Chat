@@ -22,9 +22,25 @@ body,
   min-height: 100%;
 }
 
+.chatParent {
+  width: 100%;
+}
+
+
+.you {
+  float: right;
+  min-width: 19rem;
+}
+
+.anonymous {
+  float: left;
+  min-width: 19rem;
+}
+
 #cid{
    padding: 15px;
-  # overflow-y: auto;
+   margin: 0 auto;
+   width: 90%;
 }
 
 .msgdiv {
@@ -34,4 +50,9 @@ body,
 .msgdivYou {
     word-break: break-word;
     float: right;
+}
+
+.appIn {
+    margin: 0 auto;
+    width: 80%;
 }

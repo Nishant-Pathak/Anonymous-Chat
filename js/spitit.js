@@ -6,21 +6,23 @@ function renderChat(msg, side) {
     if(msg === "") return;
 
     var name = "Anonymous";
-    var d = '  <div class="row well well-sm">'
-        + '<div class="col-xs-2 col-md-1">'
+    var d = ' <div class="row chatParent"> <div class="well well-sm anonymous">'
+        + '<div class="col-xs-3">'
         + '  <!--span>Anonymous</span--><img src="./images/manager.png" class="img-circle" style="height:30px; width:30px;">'
         + ' </div>'
-        + ' <div class="col-xs-10">'
+        + ' <div class="col-xs-9">'
         + ' <strong class="msgdiv">'+ msg +'</strong>'
+        + '</div>'
         + '</div>'
         + '</div>';
     if(side == "right") {
-        d = '  <div class="row well well-sm">'
-            +' <div class="col-xs-10">'
+        d = '  <div class="row chatParent"><div class=" well well-sm you">'
+            +' <div class="col-xs-9">'
             +' <strong class="msgdivYou">'+ msg +'</strong>'
             +'</div>'
             +  '<div class="col-xs-2">'
             + '  <img src="./images/employee.png" class="img-circle" style="height:30px; width:30px;"> <!--span>You</span-->'
+            + '</div>'
             + ' </div>'
             +'</div>';
     } else if (tabActive === false){
