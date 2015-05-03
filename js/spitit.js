@@ -33,9 +33,11 @@ function renderChat(msg, side) {
 }
 
 function sendToServer() {
-    var a = $('#msg');
-    renderChat(a.val(), "right");
-    socket.emit('send', { message: encodeURIComponent(a.val()) });
+    var a = $('#msg').val();
+    a = a.trim();
+    if(a === '') return;
+    renderChat(a, "right");
+    socket.emit('send', { message: encodeURIComponent(a) });
     $('#msg').val('');
 }
 
