@@ -47,6 +47,7 @@ function sendToServer() {
 function sendMsg(e) {
     if(e.keyCode == 13) {
         sendToServer();
+        return false;
     }
 }
 
