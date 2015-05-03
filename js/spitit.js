@@ -7,10 +7,10 @@ function renderChat(msg, side) {
 
     var name = "Anonymous";
     var d = '  <div class="row well well-sm">'
-        + '<div class="col-xs-1">'
+        + '<div class="col-xs-2 col-md-1">'
         + '  <!--span>Anonymous</span--><img src="./images/manager.png" class="img-circle" style="height:30px; width:30px;">'
         + ' </div>'
-        + ' <div class="col-xs-11">'
+        + ' <div class="col-xs-10">'
         + ' <strong class="msgdiv">'+ msg +'</strong>'
         + '</div>'
         + '</div>';
