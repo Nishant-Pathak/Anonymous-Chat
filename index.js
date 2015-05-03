@@ -40,7 +40,7 @@ function findAvailableRoom() {
 io.on('connection', function(socket){
     console.log("total users: " + io.sockets.sockets.length)
     var a = findAvailableRoom();
-    console.log('Assigning room:'+ a);
+    console.log('Assigning room: '+ a + ', id: ' + socket.id);
     socket.join(a);
     if(rooms[a] === 2) {
         io.sockets.to(a).emit('status', '2');
@@ -50,6 +50,7 @@ io.on('connection', function(socket){
         rooms[a]--;
         socket.broadcast.to(a).emit('status', '0');
         socket.leave(a);
+        console.log('Leaving room: '+ a + ', id: ' + socket.id);
     });
     socket.on('send', function (data) {
         socket.broadcast.to(a).emit('message', data);

@@ -1,6 +1,8 @@
 var messages = [];
 var socket;
 var tabActive = false;
+var isActiveUser = false;
+var lastActiveTime;
 
 function renderChat(msg, side) {
     if(msg === "") return;
@@ -41,6 +43,8 @@ function sendToServer() {
     if(a === '') return;
     renderChat(a, "right");
     socket.emit('send', { message: encodeURIComponent(a) });
+    isActiveUser = true;
+    lastActiveTime = new Date().getTime();
 
 }
 
@@ -59,6 +63,16 @@ $(window).focus(function() {
     tabActive = true;
 });
 
+function meStillActive() {
+    if(isActiveUser) {
+        var currentTime = new Date().getTime();
+        console.log(currentTime - lastActiveTime);
+        if(currentTime - lastActiveTime  > 5000 * 60) {
+            console.log("No activity from long time");
+            isActiveUser = false;
+        }
+    }
+}
 
 (function () {
 $('#myModal').modal({keyboard:false});
@@ -77,12 +91,19 @@ $('#myModal').modal({keyboard:false});
     });
 
     socket.on('status', function (data) {
-        console.log(data);
         if(data === "0") { // other left
-            location.reload();
+            meStillActive();
+            if(isActiveUser) {
+                location.reload();
+            } else {
+                socket.disconnect();
+                $('#status').addClass('alert-warning').removeClass('alert-info').removeClass('alert-success');
+                $('#status')[0].innerHTML = "<strong>Reload manually to connect.</strong> Happy chatting";
+                $("html, body").animate({ scrollTop: 0 }, 1000);
+            }
         } else if(data === "1") { //first user
         } else if(data === "2") {
-            $('#status').addClass('alert-success').removeClass('alert-info');
+            $('#status').addClass('alert-success').removeClass('alert-info').removeClass('alert-warning');
             $('#status')[0].innerHTML = "<strong>User connected.</strong> Start chatting";
         }
     });
